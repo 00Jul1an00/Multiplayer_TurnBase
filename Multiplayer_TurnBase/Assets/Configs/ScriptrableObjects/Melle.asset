@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a6e093e0da52b4b85a9584f3e51db2, type: 3}
+  m_Name: Melle
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 7
+  <Range>k__BackingField: 1
+  <ModelPrefab>k__BackingField: {fileID: 1933996870033459924, guid: 456ef35881028134ebf12376d48948a9,
+    type: 3}
