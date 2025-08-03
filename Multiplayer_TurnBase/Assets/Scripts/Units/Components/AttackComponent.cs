@@ -18,17 +18,6 @@ namespace Units
             CreateRangeIndicator();
         }
 
-        private void CreateRangeIndicator()
-        {
-            rangeIndicator = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            rangeIndicator.transform.SetParent(transform);
-            rangeIndicator.transform.localScale = new Vector3(_attackRange * 2, 0.01f, _attackRange * 2);
-            rangeIndicator.transform.localPosition = Vector3.zero;
-            Destroy(rangeIndicator.GetComponent<Collider>());
-            rangeIndicator.GetComponent<Renderer>().material.color = new Color(0.7f, 0.7f, 0.7f, 0.01f);
-            rangeIndicator.SetActive(false);
-        }
-
         public void ShowAttackRadiusAt(Vector3 position)
         {
             rangeIndicator.transform.position = new Vector3(position.x, 0, position.z);
@@ -45,7 +34,7 @@ namespace Units
 
         public bool TryAttackTarget(Unit unit)
         {
-            if (unit.Membersip == _membersip)
+            if (unit.Membersip.Value == _membersip)
             {
                 return false;
             }
@@ -59,6 +48,17 @@ namespace Units
             Destroy(unit.gameObject);
             return true;
         }
+        
+        private void CreateRangeIndicator()
+        {
+            rangeIndicator = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            rangeIndicator.transform.SetParent(transform);
+            rangeIndicator.transform.localScale = new Vector3(_attackRange * 2, 0.01f, _attackRange * 2);
+            rangeIndicator.transform.localPosition = Vector3.zero;
+            Destroy(rangeIndicator.GetComponent<Collider>());
+            rangeIndicator.GetComponent<Renderer>().material.color = new Color(0.7f, 0.7f, 0.7f, 0.01f);
+            rangeIndicator.SetActive(false);
+        }
 
         private List<Unit> UnitsInAttackRange() 
         {
@@ -69,7 +69,7 @@ namespace Units
             {
                 if (collider.TryGetComponent<Unit>(out var unit))
                 {
-                    if (unit.Membersip == _membersip)
+                    if (unit.Membersip.Value == _membersip)
                     {
                         continue;
                     }
@@ -91,7 +91,7 @@ namespace Units
             {
                 if (collider.TryGetComponent<Unit>(out var unit))
                 {
-                    if (unit.Membersip == _membersip)
+                    if (unit.Membersip.Value == _membersip)
                     {
                         continue;
                     }

@@ -9,11 +9,10 @@ public class PathVisualizer : MonoBehaviour
 
     public void SetPath(NavMeshPath path)
     {
-        _lineRenderer.positionCount = 0;
-        
+        ClearPath();
+
         if (path == null || path.corners.Length == 0)
         {
-            _lineRenderer.positionCount = 0;
             return;
         }
 
@@ -23,5 +22,10 @@ public class PathVisualizer : MonoBehaviour
         {
             _lineRenderer.SetPosition(i, path.corners[i] + Vector3.up * _yOffset);
         }
+    }
+
+    public void ClearPath()
+    {
+        _lineRenderer.positionCount = 0;
     }
 }
