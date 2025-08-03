@@ -5,36 +5,42 @@ namespace Units
 {
     public class MoveComponent : MonoBehaviour
     {
-        [Header("Movement Settings")]
-        [SerializeField] private int _maxMovementRange = 5;
+        public NavMeshPath LastValidPath { get; private set; }
 
+        private float _maxMovementRange;
         private NavMeshAgent _agent;
-        private Vector3 _originalPosition;
 
-        private void Awake()
+        public void InitComponent(float maxMovementRange)
         {
             _agent = GetComponent<NavMeshAgent>();
-            _originalPosition = transform.position;
+            _maxMovementRange = maxMovementRange;
         }
 
-        public bool TryMoveTo(Vector3 destination)
+        public NavMeshPath TryGetPath(Vector3 destination)
         {
             NavMeshPath path = new NavMeshPath();
             if (!_agent.CalculatePath(destination, path))
             {
-                return false;
+                LastValidPath = null;
+                return null;
             }
 
             float pathLength = CalculatePathLength(path);
-            int movementCost = Mathf.CeilToInt(pathLength);
 
-            if (movementCost > _maxMovementRange)
+            if (pathLength > _maxMovementRange)
             {
-                return false;
+                LastValidPath = null;
+                return null;
             }
 
-            _agent.path = path;
-            return true;
+            LastValidPath = path;
+            return path;
+        }
+
+        public void MoveToLastValidPath()
+        {
+            _agent.avoidancePriority = 100;
+            _agent.path = LastValidPath;
         }
 
         private float CalculatePathLength(NavMeshPath path)
@@ -57,7 +63,10 @@ namespace Units
         private void Update()
         {
             if (_agent.pathPending || _agent.remainingDistance < 0.1f)
+            {
+                _agent.avoidancePriority = 50;
                 return;
+            }
 
             // Плавное перемещение
             transform.position = Vector3.MoveTowards(

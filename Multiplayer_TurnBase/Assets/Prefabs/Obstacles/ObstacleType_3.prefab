@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677445092291407361}
   - component: {fileID: 7655410117606023587}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ObstacleType_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MinCountOnField>k__BackingField: 1
-  <MaxCountOnField>k__BackingField: 5
+  <MaxCountOnField>k__BackingField: 4
 --- !u!1001 &6450788740924479116
 PrefabInstance:
   m_ObjectHideFlags: 0

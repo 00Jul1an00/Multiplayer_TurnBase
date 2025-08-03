@@ -11,7 +11,7 @@ namespace Field
         [SerializeField] private List<Player> _players;
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
-        private void Start()
+        public void Init()
         {
             _obstacleSpawner.SpawnObstacles();
 
@@ -22,7 +22,7 @@ namespace Field
 
             for (int i = 0; i < _unitsSpawners.Count; i++) 
             {
-                _unitsSpawners[i].SpawnUnits(_players[i].Army, _players[i].PlayerMat);
+                _unitsSpawners[i].SpawnUnits(_players[i].Army, _players[i].PlayerMat, _players[i].Membership);
             }
         }
     }
